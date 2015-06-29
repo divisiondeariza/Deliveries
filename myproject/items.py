@@ -14,9 +14,13 @@ class Restaurant(scrapy.Item):
     minOrderPrice = scrapy.Field()
     deliveryCost = scrapy.Field()
     payMethods = scrapy.Field()
+    tagCategories = scrapy.Field()
     menu = scrapy.Field()
+    averagePunctuation = scrapy.Field()
+    quantityOfComments = scrapy.Field()
     
     
 class Dish(scrapy.Item):
-    pass
-                                         
+    name = scrapy.Field()
+    description = scrapy.Field()
+    price = scrapy.Field()
