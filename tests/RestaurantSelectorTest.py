@@ -80,37 +80,6 @@ class HenrysExampleTestCase(unittest.TestCase):
         expectedDishesIDs = ["150710", "150711", "150712", "150713", "150714", 
                              "150715", "150716", "150717", "150718", "150719"]
         self.assertEqual(category["dishesIDs"], expectedDishesIDs) 
-        
-    @unittest.skip("Deprecaded")
-    def testMenuCategoryDishesContainsOnlyDishes(self):
-        category = next(c for c in self.selector.getMenuCategories() if c["name"] == "Hamburguesas")
-        areAllElementsInCategoryDishes = all(isinstance(dish, Dish) for dish in category["dishes"])
-        self.assertTrue(areAllElementsInCategoryDishes)
-
-    @unittest.skip("Deprecaded")
-    def testGetAllDishesInCategory(self):
-        category = next(c for c in self.selector.getMenuCategories() if c["name"] == "Carnes")
-        self.assertEquals(len(category["dishes"]), 12, "Not the correct number of dishes")
-
-    @unittest.skip("Deprecaded")    
-    def testDescriptionIsNoneIfDishHasNoDescription(self):
-        category = next(c for c in self.selector.getMenuCategories() if c["name"] == "Bebidas")
-        dish = getDishByName(category["dishes"], "Limonada Natural 12 onzas")
-        self.assertEqual(dish["description"], None)    
-            
-    @unittest.skip("Deprecaded")        
-    def testGetCorrectDishDescriptionWhenExist(self):
-        category = next(c for c in self.selector.getMenuCategories() if c["name"] == "Salchipapa")
-        dish = getDishByName(category["dishes"], "Sanchipapa Maxilunch")
-        description = "Salchicha maxilunch y papa a la francesa"
-        self.assertEqual(dish["description"], description)
-            
-    @unittest.skip("Deprecaded")                
-    def testGetCorrectPriceWhenExist(self):
-        category = next(c for c in self.selector.getMenuCategories() if c["name"] == u"Menú infantil")
-        dish = getDishByName(category["dishes"], "Henry Kids")
-        price = 11500
-        self.assertEqual(dish["price"], price)
 
         
 class RedBoxExampleTestCase(unittest.TestCase):
