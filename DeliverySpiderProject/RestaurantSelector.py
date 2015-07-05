@@ -46,18 +46,18 @@ class RestaurantSelector(Selector):
  
     def _getCategoryData(self, category):
         categoryName = self._getCategoryName(category)
-        dishesIDs = self._getDishesByCategory(category)
-        categoryData = {"name":categoryName, "dishesIDs":dishesIDs}
+        productIDs = self._getProductsByCategory(category)
+        categoryData = {"name":categoryName, "productIDs":productIDs}
         return categoryData       
     
     def _getCategoryName(self, category):
         return category.xpath("text()").extract()[0].strip()
 
-    def _getDishesByCategory(self, category):
+    def _getProductsByCategory(self, category):
         numericID = self._getCategoryID(category)
         cssQuery = "div #category-" + numericID + " ul li::attr(id)"
-        dishesContainer = self.css(cssQuery).extract()  
-        return dishesContainer
+        productsContainer = self.css(cssQuery).extract()  
+        return productsContainer
      
     def _getCategoryID(self, category):
         return category.css("::attr(id)").extract()[0].split("-")[1]
@@ -67,11 +67,11 @@ class RestaurantSelector(Selector):
         if(re.search(r'\d+', text) is not None):
             numericString = re.findall(r'\d+', text)[0]
             return int(numericString)
-        return 0  
+        return 0
+
     
-    def _getElementInDishIfExists(self, dishData, cssQuery):
-        queryResults = dishData.css(cssQuery).extract()
-        if (len(queryResults) > 0):
-            return queryResults[0]
-        return None   
+    def getID(self):
+        return self.response
+    
+    
         

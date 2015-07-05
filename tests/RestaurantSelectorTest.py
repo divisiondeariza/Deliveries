@@ -8,11 +8,6 @@ import unittest
 from scrapy.http import TextResponse, Request
 import os
 from DeliverySpiderProject.RestaurantSelector import RestaurantSelector
-from DeliverySpiderProject.items import Dish
-
-
-def getDishByName(dishes, dishName):
-    return next(dish for dish in dishes if dish["name"] == dishName)
          
 def fakeResponseFromFile(file_name, url=None):
     if not url:
@@ -31,7 +26,7 @@ def getAbsolutePath(file_name):
     else:
         return file_name
 
-class HenrysExampleTestCase(unittest.TestCase):
+class RestaurantBasicDataTestCase(unittest.TestCase):
     def setUp(self):
         response = fakeResponseFromFile("examples/HenrysExample", None)
         self.selector = RestaurantSelector(response)
@@ -41,6 +36,10 @@ class HenrysExampleTestCase(unittest.TestCase):
         
     def testGetName(self):
         self.assertEquals(self.selector.getName(), "Henrys")
+ 
+    @unittest.skip("not implemented")       
+    def testGetID(self):
+        self.assertEqual(self.selector.getID(), 6980)
         
     def testGetDeliveryTimeInMinutes(self):
         self.assertEquals(self.selector.getDeliveryTimeInMinutes(), 45) 
@@ -58,6 +57,20 @@ class HenrysExampleTestCase(unittest.TestCase):
     def testGetTagCategories(self):
         tagCategories = ["Hamburguesas", "Sanduches", "Perros Calientes"]
         self.assertEquals(self.selector.getTagCategories(), tagCategories)
+          
+    def testGetAveragePunctuation(self):
+        self.assertEqual(self.selector.getAveragePunctuation(), 3)
+
+    def testGetQuantityOfComments(self):
+        self.assertEqual(self.selector.getQuantityOfComments(), 874)
+        
+class MenuDataTestCase(unittest.TestCase):
+    def setUp(self):
+        response = fakeResponseFromFile("examples/HenrysExample", None)
+        self.selector = RestaurantSelector(response)
+
+    def tearDown(self):
+        self.selector = None
         
     def testMenuIsAList(self):
         self.assertIsInstance(self.selector.getMenuCategories(), list, "menu is not a list object")
@@ -67,22 +80,15 @@ class HenrysExampleTestCase(unittest.TestCase):
         self.assertIn("Bebidas", categoryNamesInMenu, "menu does not contains Drinks Category")
     
     def testMenuContainsAlCategories(self):
-        self.assertEqual(len(self.selector.getMenuCategories()), 10)
-          
-    def testGetAveragePunctuation(self):
-        self.assertEqual(self.selector.getAveragePunctuation(), 3)
-
-    def testGetQuantityOfComments(self):
-        self.assertEqual(self.selector.getQuantityOfComments(), 874)
+        self.assertEqual(len(self.selector.getMenuCategories()), 10)    
         
-    def testGetDishesIDs(self):
+    def testGetProductIDs(self):
         category = self.selector.getMenuCategories()[1]
-        expectedDishesIDs = ["150710", "150711", "150712", "150713", "150714", 
+        expectedProductIDs = ["150710", "150711", "150712", "150713", "150714", 
                              "150715", "150716", "150717", "150718", "150719"]
-        self.assertEqual(category["dishesIDs"], expectedDishesIDs) 
-
-        
-class RedBoxExampleTestCase(unittest.TestCase):
+        self.assertEqual(category["productIDs"], expectedProductIDs) 
+    
+class ExceptionalDataTestCase(unittest.TestCase):
     def setUp(self):
         response = fakeResponseFromFile("examples/RedBoxExample", None)
         self.selector = RestaurantSelector(response)
