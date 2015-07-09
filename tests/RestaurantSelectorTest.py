@@ -5,26 +5,8 @@ Created on 28/06/2015
 @author: emmanuel
 '''
 import unittest
-from scrapy.http import TextResponse, Request
-import os
 from DeliverySpiderProject.RestaurantSelector import RestaurantSelector
-         
-def fakeResponseFromFile(file_name, url=None):
-    if not url:
-        url = 'http://www.example.com'
-    file_path = getAbsolutePath(file_name)
-    file_content = open(file_path, 'r').read()
-    response = TextResponse(url=url,
-        request=Request(url=url),
-        body=file_content)
-    return response
-
-def getAbsolutePath(file_name):
-    if not file_name[0] == '/':
-        responses_dir = os.path.dirname(os.path.realpath(__file__))
-        return os.path.join(responses_dir, file_name)
-    else:
-        return file_name
+from tests.SimulateResponsesUtils import fakeResponseFromFile
 
 class RestaurantBasicDataTestCase(unittest.TestCase):
     def setUp(self):
@@ -98,7 +80,7 @@ class ExceptionalDataTestCase(unittest.TestCase):
        
     def testMinOrderPriceIsZeroWhenRestaurantHasNotMinPrice(self):
         self.assertEquals(self.selector.getMinOrderPrice(), 0)
-        
+
 
 if __name__ == "__main__":
     #import sys;sys.argv = ['', 'Test.testName']

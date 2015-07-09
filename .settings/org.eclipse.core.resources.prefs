@@ -1,2 +1,7 @@
 eclipse.preferences.version=1
+encoding//DeliverySpiderProject/items.py=utf-8
+encoding//DeliverySpiderProject/settings.py=utf-8
+encoding//DeliverySpiderProject/spiders/Location.py=utf-8
+encoding//DeliverySpiderProject/spiders/Product.py=utf-8
+encoding//DeliverySpiderProject/spiders/Restaurant.py=utf-8
 encoding//tests/RestaurantSelectorTest.py=utf-8

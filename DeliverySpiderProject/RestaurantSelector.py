@@ -68,10 +68,9 @@ class RestaurantSelector(Selector):
             numericString = re.findall(r'\d+', text)[0]
             return int(numericString)
         return 0
-
     
     def getID(self):
-        return self.response
+        return self.css("script::text").extract()
     
     
         

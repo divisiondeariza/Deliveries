@@ -19,6 +19,7 @@ class Restaurant(scrapy.Item):
     menu = scrapy.Field()
     averagePunctuation = scrapy.Field()
     quantityOfComments = scrapy.Field()
+    id = scrapy.Field()
     
     
 class Dish(scrapy.Item):
@@ -28,3 +29,9 @@ class Dish(scrapy.Item):
     
 class Product(scrapy.Item):
     product = scrapy.Field()
+    
+class Locations(scrapy.Item):
+#     longitude = scrapy.Field()
+#     latitude = scrapy.Field()
+    coordinates = scrapy.Field()
+    restaurantIDs = scrapy.Field()
