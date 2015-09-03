@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 '''
 Created on 28/06/2015
 
@@ -5,6 +6,7 @@ Created on 28/06/2015
 '''
 import re
 from scrapy.selector.unified import Selector
+import numpy
 
 
 class RestaurantSelector(Selector):
@@ -26,7 +28,9 @@ class RestaurantSelector(Selector):
         return self._extractIntegerFromTag(cssQuery)
     
     def getPayMethods(self):
-        return self.css(".tipos_pago div::attr(title)").extract()
+        payMethodClasses = self.css(".tipos_pago div::attr(class)").extract()
+        payMethods = [payMethodClass.split(" ")[1] for payMethodClass in payMethodClasses]
+        return payMethods
 
     def getMenuCategories(self):
         cssNameQuery = '.menu-categories ul li'
@@ -43,7 +47,58 @@ class RestaurantSelector(Selector):
     def getQuantityOfComments(self):
         cssQuery = ".restaurant-info .suggest-rating .link-comentarios::text"
         return self._extractIntegerFromTag(cssQuery)
+    
+    def getID(self):
+        return self.css("script::text").extract()
+
+    def getNumberOfProducts(self):
+        menuCategories = self.getMenuCategories()
+        return sum([len(category["productIDs"]) for category in menuCategories])
+    
+    def getMeanProductsPerCategory(self):
+        totalMenuCategories = len(self.getMenuCategories())
+        if totalMenuCategories == 0:
+            return 0
+        return self.getNumberOfProducts()/totalMenuCategories
+    
+    def getCheapestPriceForProduct(self):
+        prices = self._getPriceList()
+        if len(prices)  == 0:
+            return 0
+        return min(prices)
+     
+    def getMostExpensivePriceForProduct(self):
+        prices =  self._getPriceList()
+        if len(prices)  == 0:
+            return 0
+        return max(prices)
+     
+    def getMedianOfPrices(self):
+        prices =  self._getPriceList()
+        return numpy.median(prices)
  
+    def getMeanOfPrices(self):
+        prices =  self._getPriceList()
+        return numpy.mean(prices)
+ 
+    def acceptsCash(self):
+        return "pago-efectivo" in self.getPayMethods()
+
+    def acceptsCredit(self):
+        return "pago-credito" in self.getPayMethods()
+
+    def acceptsDebit(self):
+        return "pago-debito" in self.getPayMethods()
+ 
+    def acceptsSodexo(self):
+        return "pago-sodexo" in self.getPayMethods()
+    
+    def hasTagsFromList(self, categoriesList):
+        for tag in self.getTagCategories():
+            if tag in categoriesList:
+                return True
+        return False
+              
     def _getCategoryData(self, category):
         categoryName = self._getCategoryName(category)
         productIDs = self._getProductsByCategory(category)
@@ -69,8 +124,15 @@ class RestaurantSelector(Selector):
             return int(numericString)
         return 0
     
-    def getID(self):
-        return self.css("script::text").extract()
+    def _getPriceList(self):
+        pricesStrings = self.css(".price::attr(itemprice)").extract()
+        prices = [float(priceString) for priceString in pricesStrings]
+        return prices
+
+
     
     
-        
+
+
+    
+    

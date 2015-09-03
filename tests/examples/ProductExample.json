@@ -1,0 +1,76 @@
+{
+  "id": "178789",
+  "nombre": "Pizza Pollo Champi\u00f1\u00f3n",
+  "descripcion": "Pizza con champiñón and stuff",
+  "precio": "9000.00",
+  "domicilio": "2500.00",
+  "establecimiento": "Maos Pizza",
+  "establecimiento_id": "7552",
+  "categoria": "Pizzas Tradicionales",
+  "es_2x1": "0",
+  "restringir": "0",
+  "descuento_activo": false,
+  "grupoextras": [
+    {
+      "id": "66652",
+      "nombre": "Tama\u00f1o",
+      "aplica_2x1": "0",
+      "min": "0",
+      "max": "1",
+      "seleccion_multiple": false,
+      "extras": [
+        {
+          "id": "248475",
+          "nombre": "Extralarge 55 cms",
+          "precio": "40000.00",
+          "grupos_extras_id": "66652",
+          "orden": "0",
+          "plu": null,
+          "precio_original": null,
+          "desactivado": "0",
+          "grupos_extras_nombre": "Tama\u00f1o",
+          "product_id": "178789"
+        },
+        {
+          "id": "248476",
+          "nombre": "Large 45 cms",
+          "precio": "28000.00",
+          "grupos_extras_id": "66652",
+          "orden": "0",
+          "plu": null,
+          "precio_original": null,
+          "desactivado": "0",
+          "grupos_extras_nombre": "Tama\u00f1o",
+          "product_id": "178789"
+        },
+        {
+          "id": "248477",
+          "nombre": "Mediana 35 cms",
+          "precio": "22000.00",
+          "grupos_extras_id": "66652",
+          "orden": "0",
+          "plu": null,
+          "precio_original": null,
+          "desactivado": "0",
+          "grupos_extras_nombre": "Tama\u00f1o",
+          "product_id": "178789"
+        },
+        {
+          "id": "248478",
+          "nombre": "Personal 25 cms",
+          "precio": "10000.00",
+          "grupos_extras_id": "66652",
+          "orden": "0",
+          "plu": null,
+          "precio_original": null,
+          "desactivado": "0",
+          "grupos_extras_nombre": "Tama\u00f1o",
+          "product_id": "178789"
+        }
+      ]
+    }
+  ],
+  "orden": 0,
+  "img_url": null,
+  "timthumb": ""
+}

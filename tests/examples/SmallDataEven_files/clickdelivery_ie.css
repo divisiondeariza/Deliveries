@@ -1,0 +1,94 @@
+/*
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+*/
+/* 
+    Created on : 17/10/2014, 10:15:03 AM
+    Author     : diegopineda
+*/
+
+/* IE8 uses \0 */
+@media all\0 { 
+    .section-bg input[type="submit"] {
+
+        position: relative;
+        margin-right: -1px;
+
+    }
+    .section-bg .address form{
+        display: block;
+        background-image: url('../img/address_bg_transparent.png')!important ;
+
+        border-radius: 4px;
+
+    }
+    ul.slider {
+        background-image: url('../img/address_bg_transparent.png')!important ;
+    }
+    .asset{
+        background: url(../img/assets_ie8.png) no-repeat;
+        background-size: 420px 393px;
+        display: inline-block;
+        zoom: 1;
+    }
+    .asset_icons{
+         background: url(../img/assets_icons_ie.png) no-repeat;
+        
+        
+    }
+    .cambiar-ciudad-nav{
+        background-image: url('../img/ie/bg_ciudad_ie.png')!important ;
+    }
+
+    #header .site_logo a > *{
+        background-image: url(../img/site_logo_ie.png);
+    }
+    .button.blue.lookup {
+    /*background: #29b6c3;
+    border-bottom: 2px solid #23929C;*/
+    position: relative; 
+    top:    -60px;
+}
+
+    .button.loading {
+
+        overflow:hidden;
+        text-indent: -1000px;
+        
+    }
+    .button.blue.loading {
+
+        min-width: 46px;
+        
+    }
+    .menu-categories > ul li.active{
+
+        border-right: none;
+        margin-right: -1px;
+        border-radius: 4px 0 0 4px;
+        -webkit-border-radius: 4px 0 0 4px;
+        -moz-border-radius: 4px 0 0 4px;
+        background-color: #498bf4;
+        background-image: none;
+        color: #fff;
+    }
+    .modal.animated, .modal.visible{
+        background-color: #fff;
+    }
+/*** Elements **/
+input,
+select,
+textarea {
+    
+    min-height: 25px;
+}
+#BuscarSearch{
+    min-height: 18px;
+}
+
+.modal-overlay.fadeIn.animated{
+     background-image: url('../img/address_bg_transparent.png')!important ;
+}
+
+}
