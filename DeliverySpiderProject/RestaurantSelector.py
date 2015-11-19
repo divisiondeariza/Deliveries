@@ -24,8 +24,8 @@ class RestaurantSelector(Selector):
         return self._extractIntegerFromTag(cssQuery)
         
     def getDeliveryCost(self):
-        cssQuery = '.info-extra .third .funcion-view'
-        return self._extractIntegerFromTag(cssQuery)
+        cssQuery = '.info-extra .third .funcion-view::text'
+        return self.css(cssQuery).extract()[0].strip()
     
     def getPayMethods(self):
         payMethodClasses = self.css(".tipos_pago div::attr(class)").extract()

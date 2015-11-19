@@ -1,6 +1,6 @@
 # -*- coding: utf-8 -*-
-from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
-from scrapy.contrib.spiders.crawl import Rule, CrawlSpider
+from scrapy.linkextractors import LinkExtractor
+from scrapy.spiders.crawl import Rule, CrawlSpider
 from DeliverySpiderProject.RestaurantSelector import RestaurantSelector
 from DeliverySpiderProject.items import Restaurant
 from DeliverySpiderProject.ProductLinkGetter import ProductLinkGetter
@@ -14,11 +14,11 @@ class RestaurantSpider(CrawlSpider):
         'http://www.domiciliosbogota.com/',
     ) 
     productLinkGetter = ProductLinkGetter()
-    rules = [Rule(SgmlLinkExtractor(allow=(r"http://www\.domiciliosbogota\.com/$")), 'parseMain')]
+    rules = [Rule(LinkExtractor(allow=(r"http://www\.domiciliosbogota\.com/$")), 'parseMain')]
     
     def parseMain(self, response):
         self.restaurantIDsGetter = RestaurantIDsGetter(response)
-        linksExtractor = SgmlLinkExtractor(allow=(r"http\:\/\/www\.domiciliosbogota\.com\/domicilios\-.*"))
+        linksExtractor = LinkExtractor(allow=(r"http\:\/\/www\.domiciliosbogota\.com\/domicilios\-.*"))
         links = linksExtractor.extract_links(response)
         for link in links:
             yield Request(link.url, callback = self.parseRestaurants)

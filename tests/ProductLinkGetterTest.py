@@ -19,13 +19,13 @@ class Test(unittest.TestCase):
 
 
     def testGetUUrlFromProductID(self):
-        id = "12345"
+        id = "http://www.domiciliosbogota.com/12345"
         productLinkGetter = ProductLinkGetter()
         expectedLink = "http://www.domiciliosbogota.com/establecimientos/producto/12345"
         self.assertEqual(expectedLink, productLinkGetter.getLink(id)) 
         
     def testReturnNoneWhenLinkIsNotNumeric(self):
-        id = "cat-12345"
+        id = "http://www.domiciliosbogota.com/cat-12345"
         productLinkGetter = ProductLinkGetter()
         self.assertEqual(None, productLinkGetter.getLink(id)) 
 

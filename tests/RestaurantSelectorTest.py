@@ -26,7 +26,7 @@ class RestaurantBasicDataTestCase(unittest.TestCase):
         self.assertEquals(self.selector.getMinOrderPrice(), 12000)
 
     def testGetDeliveryCost(self):
-        self.assertEqual(self.selector.getDeliveryCost(), 3500)
+        self.assertEqual(self.selector.getDeliveryCost(), "$3500.00")
         
     def testGetPayMethods(self):
         payMethods = ["pago-efectivo", u"pago-debito", u"pago-credito", "pago-sodexo", "pago-sodexo"]

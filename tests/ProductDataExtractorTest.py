@@ -5,7 +5,7 @@ Created on 23/08/2015
 @author: emmanuel
 '''
 import unittest
-from tests.SimulateResponsesUtils import fakeResponseFromFile
+from tests.SimulateResponsesUtils import fakeResponseFromFile, getAbsolutePath
 from DeliverySpiderProject import ProductDataExtractor
 
 
@@ -14,7 +14,8 @@ class ProductDataExtractorTest(unittest.TestCase):
     def setUp(self):
         response = fakeResponseFromFile("examples/ProductExample.json", None)
         self.productDataExtractor = ProductDataExtractor.ProductDataExtractor(response)
-
+        self.restaurantsFile = getAbsolutePath("examples/restaurants.json")
+        
     def tearDown(self):
         pass
     
@@ -24,11 +25,11 @@ class ProductDataExtractorTest(unittest.TestCase):
     
 
     def testProductRestaurantBelongsToTag(self):
-        belongsToTag = self.productDataExtractor.restaurantBelongsToTag("Pizza", "examples/restaurants.json")
+        belongsToTag = self.productDataExtractor.restaurantBelongsToTag("Pizza", self.restaurantsFile)
         self.assertTrue(belongsToTag)
         
     def testProductRestaurantDoesNotBelongsToTag(self):
-        belongsToTag = self.productDataExtractor.restaurantBelongsToTag("Non-existent-tag", "examples/restaurants.json")
+        belongsToTag = self.productDataExtractor.restaurantBelongsToTag("Non-existent-tag", self.restaurantsFile)
         self.assertFalse(belongsToTag)
         
     def testProductRestaurantBelongsToTagList(self):
@@ -39,7 +40,7 @@ class ProductDataExtractorTest(unittest.TestCase):
                    "Comida Colombiana", 
                    "Comida Saludable",
                    "Pizza"]
-        belongsToTagList = self.productDataExtractor.restaurantBelongsToTagList(tagList, "examples/restaurants.json")
+        belongsToTagList = self.productDataExtractor.restaurantBelongsToTagList(tagList, self.restaurantsFile)
         self.assertTrue(belongsToTagList)        
  
     def testProductRestaurantDoesNotBelongsToTagList(self):
@@ -49,7 +50,7 @@ class ProductDataExtractorTest(unittest.TestCase):
                    "Sanduches",
                    "Comida Colombiana", 
                    "Comida Saludable"]
-        belongsToTagList = self.productDataExtractor.restaurantBelongsToTagList(tagList, "examples/restaurants.json")
+        belongsToTagList = self.productDataExtractor.restaurantBelongsToTagList(tagList, self.restaurantsFile)
         self.assertFalse(belongsToTagList)        
         
     def testGetProductCategory(self):
@@ -69,11 +70,12 @@ class ProductDataExtractorTest(unittest.TestCase):
         self.assertEqual(price, 9000)
         
     def testGetRestaurantCategories(self):
-        restaurantCategories = self.productDataExtractor.getRestaurantCategories("examples/restaurants.json")
+        restaurantCategories = self.productDataExtractor.getRestaurantCategories(self.restaurantsFile)
         self.assertListEqual(restaurantCategories, ["Pizza", "Nuevos Restaurantes"])
     
     def testGetEmptyRestaurantCategoriesListWhenNoRestaurantFound(self):
-        restaurantCategories = self.productDataExtractor.getRestaurantCategories("examples/restaurantsEmpty.json")
+        restautantsEmptyFile = getAbsolutePath("examples/restaurantsEmpty.json")
+        restaurantCategories = self.productDataExtractor.getRestaurantCategories(restautantsEmptyFile)
         self.assertListEqual(restaurantCategories, [])
         
                 

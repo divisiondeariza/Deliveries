@@ -15,3 +15,7 @@ NEWSPIDER_MODULE = 'DeliverySpiderProject.spiders'
 
 # Crawl responsibly by identifying yourself (and your website) on the user-agent
 #USER_AGENT = 'DeliverySpiderProject (+http://www.yourdomain.com)'
+
+DOWNLOAD_HANDLERS = {'s3': None,}
+
+ITEM_PIPELINES = {'DeliverySpiderProject.pipelines.SaveOrderedCsv': 300}

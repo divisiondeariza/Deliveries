@@ -1,9 +1,8 @@
 # -*- coding: utf-8 -*-
-import scrapy
-from scrapy.contrib.spiders import CrawlSpider, Rule
+from scrapy.spiders import CrawlSpider, Rule
 from DeliverySpiderProject.items import Product
 import json
-from scrapy.contrib.linkextractors.sgml import SgmlLinkExtractor
+from scrapy.linkextractors import LinkExtractor
 from DeliverySpiderProject.ProductLinkGetter import ProductLinkGetter
 
 
@@ -13,8 +12,9 @@ class ProductSpider(CrawlSpider):
     start_urls = ['http://www.domiciliosbogota.com/']
     productLinkGetter = ProductLinkGetter()
     rules = (
-        Rule(SgmlLinkExtractor(allow=())),
-        Rule(SgmlLinkExtractor(allow=(),
+        Rule(LinkExtractor(allow=()), follow=True),
+        Rule(LinkExtractor(allow=(),
+                               canonicalize = False,
                                tags = "li",
                                attrs = ("id",), 
                                process_value = productLinkGetter.getLink), 

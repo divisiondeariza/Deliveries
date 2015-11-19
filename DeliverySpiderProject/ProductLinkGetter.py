@@ -16,7 +16,8 @@ class ProductLinkGetter(object):
         '''
 
     
-    def getLink(self, id):
+    def getLink(self, id_with_prefix):
+        id =  id_with_prefix.split("/")[-1]
         if id.isdigit():
             link = "http://www.domiciliosbogota.com/establecimientos/producto/" + id
             return link

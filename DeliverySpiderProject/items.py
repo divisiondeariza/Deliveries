@@ -63,7 +63,7 @@ class ProductCsv(scrapy.Item):
     sanduches = scrapy.Field()
     sopas = scrapy.Field()
     comida_saludable = scrapy.Field()
-    otros_tags = scrapy.Field()
+    tags_del_restaurante = scrapy.Field()
     
 class Locations(scrapy.Item):
     coordinates = scrapy.Field()

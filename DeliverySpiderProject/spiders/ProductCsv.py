@@ -31,7 +31,7 @@ class ProductCsvSpider(ProductSpider):
         product["sanduches"] = dataExtractor.restaurantBelongsToTag("Sanduches", "restaurants.json")
         product["sopas"] = dataExtractor.restaurantBelongsToTag("Sopas", "restaurants.json")
         product["comida_saludable"] = dataExtractor.restaurantBelongsToTag("Comida Saludable", "restaurants.json")
-        product["otros_tags"] = dataExtractor.getRestaurantCategories("restaurants.json")
+        product["tags_del_restaurante"] = dataExtractor.getRestaurantCategories("restaurants.json")
         if dataExtractor.restaurantBelongsToTagList(self.tagList, "restaurants.json"):            
             return product
         else:
